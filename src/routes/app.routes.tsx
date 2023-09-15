@@ -4,7 +4,7 @@ import Hub from "../pages/hub";
 type RootBottomTab = {
   Noticias: undefined;
   Hub: undefined;
-  Configuracao: undefined;
+  Settings: undefined;
 };
 
 const { Navigator, Screen } = createBottomTabNavigator<RootBottomTab>();
@@ -14,7 +14,7 @@ export default function App_routes() {
     <Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "blue",
+        tabBarActiveTintColor: "skyblue",
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
             case "Noticias":
@@ -33,7 +33,7 @@ export default function App_routes() {
                   color={color}
                 />
               );
-            case "Configuracao":
+            case "Settings":
               return (
                 <Ionicons
                   name={focused ? "cog" : "cog-outline"}
@@ -47,7 +47,7 @@ export default function App_routes() {
     >
       <Screen name="Noticias" component={Ex} />
       <Screen name="Hub" component={Hub} />
-      <Screen name="Configuracao" component={Ex} />
+      <Screen name="Settings" component={Ex} />
     </Navigator>
   );
 }
