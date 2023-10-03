@@ -4,8 +4,8 @@ import { TouchableOpacity, View, VirtualizedList, Text } from "react-native";
 import api from "../../services/api";
 import { Ionicons } from "@expo/vector-icons";
 
-// Define o tipo de objeto para representar as moedas
-type MoedaType = {
+// Define o tipo de objeto para representar as Coins
+type CoinType = {
     id: number;
     name: string;
     symbol: string;
@@ -20,15 +20,15 @@ type MoedaType = {
     };
 };
 
-// Componente de item que representa uma moeda
-function Item({ item }: { item: MoedaType }) {
+// Componente de item que representa uma Coin
+function Item({ item }: { item: CoinType }) {
     const [detalhes, setDetalhes] = useState(false);
 
     return (
         <TouchableOpacity
             onLongPress={() => setDetalhes(!detalhes)}
 
-            // background das infos de cada criptomoeda
+            // background das infos de cada criptoCoin
             style={{
                 backgroundColor: "#ffffff",
                 justifyContent: 'center',
@@ -58,7 +58,7 @@ function Item({ item }: { item: MoedaType }) {
                             }}
                         >
                             {item.symbol}
-                        </Text>{"olá"}
+                        </Text>{" "}
                         - {item.name}
                     </Text>
                 </View>
@@ -104,10 +104,12 @@ function Item({ item }: { item: MoedaType }) {
                             style: "percent",
                         })}
                     </Text>
+
                     {/* Preço em USD */}
                     <Text
                         style={{
-                            fontWeight: "bold",
+                            fontWeight: "900",
+                            color: "black",
                         }}
                     >
                         {item.quote.USD.price.toLocaleString("pt-BR", {
@@ -135,7 +137,7 @@ function Item({ item }: { item: MoedaType }) {
                 <Text style={{
                     fontWeight: "300"
                 }}>
-                    Variação 24h:{" "}
+                    Variation 24h:{" "}
                     {item.quote.USD.percent_change_24h.toLocaleString("pt-BR", {
                         style: "percent",
                     })}
@@ -144,7 +146,7 @@ function Item({ item }: { item: MoedaType }) {
                 <Text style={{
                     fontWeight: "300"
                 }}>
-                    Variação 7d:{" "}
+                    Variation 7d: {""}
                     {item.quote.USD.percent_change_7d.toLocaleString("pt-BR", {
                         style: "percent",
                     })}
@@ -155,23 +157,23 @@ function Item({ item }: { item: MoedaType }) {
 }
 
 // Função para renderizar um item da lista
-function renderItem({ item }: { item: MoedaType }) {
+function renderItem({ item }: { item: CoinType }) {
     return <Item item={item} />;
 }
 
-// Componente principal que busca e exibe a lista de moedas
+// Componente principal que busca e exibe a lista de Coins
 export default function Hub() {
-    const [moedas, setMoedas] = useState<MoedaType[]>([]);
+    const [Coins, setCoins] = useState<CoinType[]>([]);
 
     // Função para buscar dados da API quando o componente é montado
     const getData = async () => {
         try {
             const response = await api.get("/v1/cryptocurrency/listings/latest");
-            const { data }: { data: MoedaType[] } = response.data;
+            const { data }: { data: CoinType[] } = response.data;
 
-            setMoedas(data);
+            setCoins(data);
         } catch (error) {
-            setMoedas([]); // Limpa a lista em caso de erro
+            setCoins([]); // Limpa a lista em caso de erro
         }
     };
 
@@ -182,19 +184,19 @@ export default function Hub() {
 
     return (
         <VirtualizedList
-            data={moedas}
+            data={Coins}
             keyExtractor={(item) => String(item.id)}
             renderItem={renderItem}
-            getItemCount={() => moedas.length}
+            getItemCount={() => Coins.length}
             getItem={(data, index) => data[index]}
             ItemSeparatorComponent={() => (
                 <View
                     style={{
-                        height: 1,
+                        height: 0,
                         backgroundColor: "#ddd",
                         marginVertical: 10,
                         alignSelf: "center",
-                        width: "60%",
+                        width: "10%",
                     }}
                 />
             )}
