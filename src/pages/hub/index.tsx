@@ -20,7 +20,7 @@ type CoinType = {
     };
 };
 
-// Componente de item que representa uma Coin
+// Componente de item que representa uma moeda
 function Item({ item }: { item: CoinType }) {
     const [detalhes, setDetalhes] = useState(false);
 
