@@ -26,7 +26,7 @@ function Item({ item }: { item: CoinType }) {
 
     return (
         <TouchableOpacity
-            onLongPress={() => setDetalhes(!detalhes)}
+            onPress={() => setDetalhes(!detalhes)}
 
             // background das infos de cada criptoCoin
             style={{

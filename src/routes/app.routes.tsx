@@ -14,6 +14,7 @@ const { Navigator, Screen } = createBottomTabNavigator<RootBottomTab>();
 export default function App_routes() {
     return (
         <Navigator
+            initialRouteName="Hub"
             screenOptions={({ route }) => ({
                 tabBarShowLabel: false, // Não mostra rótulos
                 tabBarActiveTintColor: "skyblue", // Cor da tab enquanto ativa
